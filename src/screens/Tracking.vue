@@ -89,7 +89,7 @@ export default{
     methods: {
         findEntries(from="",to=""){
             const headers = getHeaders();
-            axios.get('http://207.154.193.21:3000/entries?from='+from+'&to='+to, { headers })
+            axios.get('/entries?from='+from+'&to='+to, { headers })
             .then(response => {
                 this.entries = response.data;
                 if (from && to){
@@ -132,7 +132,7 @@ export default{
 
         findTasks(name="",project=""){
             const headers = getHeaders();
-            axios.get('http://207.154.193.21:3000/tasks?name='+name+'&project='+project+'&limit=5', { headers })
+            axios.get('/tasks?name='+name+'&project='+project+'&limit=5', { headers })
             .then(response => {
                 this.tasks = response.data;
             })
@@ -150,7 +150,7 @@ export default{
                 timeEstimate:e.target.timeEstimate.value,
             };
             
-            axios.post('http://207.154.193.21:3000/entries',data, { headers })
+            axios.post('/entries',data, { headers })
             .then(response => {
                 console.log(response.data);
                 
@@ -167,7 +167,7 @@ export default{
 
         deleteRecord(id){
             const headers = getHeaders();
-            axios.delete('http://207.154.193.21:3000/entries/'+id, { headers })
+            axios.delete('/entries/'+id, { headers })
             .then(response => {
                 const startOfWeek = this.currentDate.clone().startOf('week').format('YYYY-MM-DD');
                 const endOfWeek = this.currentDate.clone().endOf('week').format('YYYY-MM-DD');

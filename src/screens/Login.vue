@@ -25,7 +25,7 @@ export default{
                 password:e.target.password.value,
             };
 
-            axios.post('http://207.154.193.21:3000/auth/login', data)
+            axios.post('/auth/login', data)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 router.push('/projects')
