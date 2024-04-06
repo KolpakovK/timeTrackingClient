@@ -105,7 +105,7 @@ export default {
     methods: {
         findTasks(name="",project=""){
             const headers = getHeaders();
-            axios.get('/tasks?name='+name+'&project='+project, { headers })
+            axios.get('/api/tasks?name='+name+'&project='+project, { headers })
             .then(response => {
                 this.tasks = response.data;
             })
@@ -115,7 +115,7 @@ export default {
         },
         getStatuses(){
             const headers = getHeaders();
-            axios.get('/statuses', { headers })
+            axios.get('/api/statuses', { headers })
             .then(response => {
                 this.statuses = [];
                 response.data.forEach(element => {
@@ -128,7 +128,7 @@ export default {
         },
         getProjects(){
             const headers = getHeaders();
-            axios.get('/projects', { headers })
+            axios.get('/api/projects', { headers })
             .then(response => {
                 this.projects = [];
                 response.data.forEach(element => {
@@ -148,7 +148,7 @@ export default {
                 timeEstimate:e.target.timeEstimate.value,
             };
             
-            axios.post('/tasks',data, { headers })
+            axios.post('/api/tasks',data, { headers })
             .then(response => {
                 console.log(response.data);
                 
@@ -168,7 +168,7 @@ export default {
                 timeEstimate:e.target.timeEstimate.value,
             };
             
-            axios.patch('/tasks/'+this.updateData._id,data, { headers })
+            axios.patch('/api/tasks/'+this.updateData._id,data, { headers })
             .then(response => {
                 console.log(response.data);
                 
@@ -181,7 +181,7 @@ export default {
         },
         deleteRecord(id){
             const headers = getHeaders();
-            axios.delete('/tasks/'+id, { headers })
+            axios.delete('/api/tasks/'+id, { headers })
             .then(response => {
                 this.updateModal = false;
                 this.findTasks("");
