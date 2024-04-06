@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": {
+      "/": {
         target: "http://207.154.193.21:3000",
         changeOrigin: true,
         secure: false,
