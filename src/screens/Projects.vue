@@ -99,7 +99,7 @@
     methods: {
       findProjects(name){
         const headers = getHeaders();
-        axios.get('/api/projects?name='+name, { headers })
+        axios.get('http://207.154.193.21:3000/api/projects?name='+name, { headers })
         .then(response => {
           this.projects = response.data;
         })
@@ -115,7 +115,7 @@
           color:e.target.color.value
         };
         
-        axios.post('/api/projects',data, { headers })
+        axios.post('http://207.154.193.21:3000/api/projects',data, { headers })
         .then(response => {
           console.log(response.data);
           
@@ -134,7 +134,7 @@
           color:e.target.color.value
         };
         
-        axios.patch('/api/projects/'+this.updateData._id,data, { headers })
+        axios.patch('http://207.154.193.21:3000/api/projects/'+this.updateData._id,data, { headers })
         .then(response => {
           console.log(response.data);
           
@@ -147,7 +147,7 @@
       },
       deleteRecord(id){
         const headers = getHeaders();
-        axios.delete('/api/projects/'+id, { headers })
+        axios.delete('http://207.154.193.21:3000/api/projects/'+id, { headers })
         .then(response => {
           this.updateModal = false;
           this.findProjects("");

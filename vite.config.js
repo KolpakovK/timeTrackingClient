@@ -8,6 +8,13 @@ export default defineConfig({
       "/api": {
         target:"http://207.154.193.21:3000",
         changeOrigin: true,
+        secure: false,
+				rewrite: (p) => {
+          console.log('Original Path:', p);
+          const rewrittenPath = p.replace(/^\/api/, "");
+          console.log('Rewritten Path:', rewrittenPath);
+          return rewrittenPath;
+       },
       },
     },
     cors: false

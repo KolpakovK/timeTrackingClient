@@ -25,7 +25,7 @@ export default{
                 password:e.target.password.value,
             };
 
-            axios.post('/api/auth/login', data, { 
+            axios.post('http://207.154.193.21:3000/api/auth/login', data, { 
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 }
