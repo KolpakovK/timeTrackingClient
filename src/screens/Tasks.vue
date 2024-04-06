@@ -105,7 +105,7 @@ export default {
     methods: {
         findTasks(name="",project=""){
             const headers = getHeaders();
-            axios.get('/tasks?name='+name+'&project='+project, { headers })
+            axios.get('http://207.154.193.21:3000/tasks?name='+name+'&project='+project, { headers })
             .then(response => {
                 this.tasks = response.data;
             })
@@ -115,7 +115,7 @@ export default {
         },
         getStatuses(){
             const headers = getHeaders();
-            axios.get('/statuses', { headers })
+            axios.get('http://207.154.193.21:3000/statuses', { headers })
             .then(response => {
                 this.statuses = [];
                 response.data.forEach(element => {
@@ -128,7 +128,7 @@ export default {
         },
         getProjects(){
             const headers = getHeaders();
-            axios.get('/projects', { headers })
+            axios.get('http://207.154.193.21:3000/projects', { headers })
             .then(response => {
                 this.projects = [];
                 response.data.forEach(element => {
@@ -148,7 +148,7 @@ export default {
                 timeEstimate:e.target.timeEstimate.value,
             };
             
-            axios.post('/tasks',data, { headers })
+            axios.post('http://207.154.193.21:3000/tasks',data, { headers })
             .then(response => {
                 console.log(response.data);
                 
@@ -168,7 +168,7 @@ export default {
                 timeEstimate:e.target.timeEstimate.value,
             };
             
-            axios.patch('/tasks/'+this.updateData._id,data, { headers })
+            axios.patch('http://207.154.193.21:3000/tasks/'+this.updateData._id,data, { headers })
             .then(response => {
                 console.log(response.data);
                 
@@ -181,7 +181,7 @@ export default {
         },
         deleteRecord(id){
             const headers = getHeaders();
-            axios.delete('/tasks/'+id, { headers })
+            axios.delete('http://207.154.193.21:3000/tasks/'+id, { headers })
             .then(response => {
                 this.updateModal = false;
                 this.findTasks("");

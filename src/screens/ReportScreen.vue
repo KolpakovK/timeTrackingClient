@@ -42,7 +42,7 @@ export default{
         async findEntries(from="",to=""){
             try {
                 const headers = getHeaders();
-                let response = await axios.get('/entries?from='+from+'&to='+to, { headers });
+                let response = await axios.get('http://207.154.193.21:3000/entries?from='+from+'&to='+to, { headers });
                 this.$nextTick(() => {
                     this.transformedData = this.transformData(response.data);
                 });
