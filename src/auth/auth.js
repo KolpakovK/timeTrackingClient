@@ -14,7 +14,8 @@ export const getHeaders = () => {
   let token = localStorage.getItem('token');
   if (token){
     return {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Access-Control-Allow-Origin': '*',
     }
   }
   else{
