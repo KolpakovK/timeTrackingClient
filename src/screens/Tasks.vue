@@ -3,12 +3,12 @@
         <div class="flex justify-between items-center">
         <p class=" font-bold text-5xl text-gray-900">Tasks</p>
         <div class="flex items-center gap-4">
-            <vueInput placeholder="Search" @changed="(data) => findTasks(data)">
+            <vueInput placeholder="Search" @onChange="(data) => searchRecords(data,null)">
             <template #contentBefore><i class="ri-search-line"></i></template>
             </vueInput>
             <div class="flex gap-2 items-center">
                 <VueLabel name="project">Project:</VueLabel>
-                <VueSelect :options="projects" name="project" required @change="(data) => findTasks('',data.target.value)"></VueSelect>
+                <VueSelect :options="projects" name="project" required @change="(data) => searchRecords(null,data.target.value)"></VueSelect>
             </div>
             <vueButton @clicked="createModal=true"><template #button-content>Add new task</template></vueButton>
         </div>
@@ -64,7 +64,7 @@
 </template>
     
 <script>
-import { isAuthenticated, getHeaders } from "../auth/auth"
+import { isAuthenticated, getHeaders, logOut } from "../auth/auth"
 import Modal from '../components/Modal.vue';
 import BasicTable from '../components/Table.vue';
 
@@ -80,6 +80,10 @@ export default {
         return {
             projects: [],
             tasks:[],
+            search:{
+                name:"",
+                project:""
+            },
             createModal: false,
             updateModal: false,
             updateData:{},
@@ -110,6 +114,9 @@ export default {
                 this.tasks = response.data;
             })
             .catch(error => {
+                if (error.response.statusText == "Unauthorized"){
+                    logOut();
+                }
                 console.log(error);
             });
         },
@@ -193,6 +200,12 @@ export default {
         openUpdateModal(data){
             this.updateData = data;
             this.updateModal = true;
+        },
+        searchRecords(name="",project=""){
+            if (name!=null) this.search.name = name;
+            if (project!=null) this.search.project = project;
+
+            this.findTasks(this.search.name,this.search.project);
         }
     }
 };

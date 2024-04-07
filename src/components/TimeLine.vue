@@ -1,7 +1,7 @@
 <template>
     <div class=" flex gap-2">
         <!-- col -->
-        <div class=" flex flex-col flex-1 p-3 rounded-xl bg-gray-100 border gap-6" v-for="item in data"  :class="{'border-primary-200':isToday(item)}">
+        <div class=" flex flex-col flex-1 p-3 rounded-xl bg-gray-50 bg-opacity-25 border gap-6" v-for="item in data"  :class="{'border-primary-200':isToday(item)}">
             <div class="flex flex-col gap-1 pb-4 border-b border-gray-200">
                 <p class=" text-sm text-gray-500">{{ formatDate(item.date, "dddd") }}</p>
                 <p class=" text-xl font-bold text-gray-900" :class="{'text-primary-500':isToday(item)}">{{ formatDate(item.date, "DD MMMM") }}</p>

@@ -51,7 +51,7 @@
   </template>
   
   <script>
-  import { isAuthenticated, getHeaders } from "../auth/auth"
+  import { isAuthenticated, getHeaders, logOut } from "../auth/auth"
   
   import Modal from '../components/Modal.vue';
   import BasicTable from '../components/Table.vue';
@@ -104,6 +104,9 @@
           this.projects = response.data;
         })
         .catch(error => {
+          if (error.response.statusText == "Unauthorized"){
+            logOut();
+          }
           console.log(error);
         });
       },

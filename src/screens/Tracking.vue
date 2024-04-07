@@ -12,6 +12,8 @@
             </div>
         </div>
 
+        <Timer :tableCol="tableCol" :tasks="tasks" @timerStoped="(data) => createRecord(null,data)"></Timer>
+
         <TimeLine :data="entries" class=" flex-1" @deleteCard="(data) => deleteRecord(data)"></TimeLine>
     </div>
 
@@ -20,7 +22,7 @@
         <div class="flex flex-col gap-6">
             <p class=" text-3xl text-gray-900 font-bold min-w-[550px]">Choose a task to track it</p>
             <vueField labelText="Search" @changed="(data) => findTasks(data)"></vueField>
-            <BasicTable :columns="tableCol" :data="tasks" editMode class=" max-h-[550px]" @selected-item="(data) => openCreateModal(data)"/>
+            <BasicTable :columns="tableCol" :data="tasks" editMode class=" max-h-[550px]" @selected-item="(data) => pickTask(data)"/>
         </div>
     </Modal>
 
@@ -50,11 +52,12 @@
 </template>
 
 <script>
-import { isAuthenticated, getHeaders } from "../auth/auth"
+import { isAuthenticated, getHeaders, logOut } from "../auth/auth"
 import moment from 'moment'
 import Modal from '../components/Modal.vue';
 import TimeLine from '../components/TimeLine.vue';
 import BasicTable from '../components/Table.vue';
+import Timer from '../components/Timer.vue';
 
 import axios from 'axios';
 
@@ -62,7 +65,8 @@ export default{
     components: {
         TimeLine,
         Modal,
-        BasicTable
+        BasicTable,
+        Timer
     },
     data(){
         return{
@@ -97,6 +101,9 @@ export default{
                 }
             })
             .catch(error => {
+                if (error.response.statusText == "Unauthorized"){
+                    logOut();
+                }
                 console.log(error);
             });
         },
@@ -141,14 +148,20 @@ export default{
             });
         },
 
-        createRecord(e){
+        createRecord(e,model=null){
             const headers = getHeaders();
-            let data = {
-                note:e.target.note.value,
-                date:e.target.date.value,
-                task:this.selectedTask._id,
-                timeEstimate:e.target.timeEstimate.value,
-            };
+            let data;
+            if (e!=null){
+                data = {
+                    note:e.target.note.value,
+                    date:e.target.date.value,
+                    task:this.selectedTask._id,
+                    timeEstimate:e.target.timeEstimate.value,
+                };
+            }
+            else{
+                data = model;
+            }
             
             axios.post('http://207.154.193.21:3000/api/entries',data, { headers })
             .then(response => {
@@ -178,10 +191,10 @@ export default{
             });
         },
 
-        openCreateModal(data){
+        pickTask(data){
             this.selectedTask = data;
             this.selectTaskModal = false;
-            this.createModal = true;
+            this.createModal = true
         }
     }
 }
