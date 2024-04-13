@@ -118,7 +118,8 @@ export default{
                                 time: [{
                                     date: timeEntry.date,
                                     note: timeEntry.note,
-                                    timeEstimate: timeEntry.timeEstimate
+                                    timeEstimate: timeEntry.timeEstimate,
+                                    billable: timeEntry.billable,
                                 }],
                                 timeSpent: timeEntry.timeEstimate
                             })
@@ -127,9 +128,11 @@ export default{
                             result[projectIndex].tasks[taskIndex].time.push({
                                 date: timeEntry.date,
                                 note: timeEntry.note,
-                                timeEstimate: timeEntry.timeEstimate
+                                timeEstimate: timeEntry.timeEstimate,
+                                billable: timeEntry.billable,  
                             });
-                            result[projectIndex].tasks[taskIndex].timeSpent += timeEntry.timeEstimate;
+                            if (timeEntry.billable)
+                                result[projectIndex].tasks[taskIndex].timeSpent += timeEntry.timeEstimate;
                         }
                     }
                     

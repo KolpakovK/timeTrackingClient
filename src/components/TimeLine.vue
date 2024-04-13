@@ -17,6 +17,7 @@
                         <i class="ri-time-line"></i>
                         <p class=" text-sm font-bold text-gray-500">{{ card.timeEstimate + " h." }}</p>
                     </div>
+                    <p v-if="!card.billable" class=" font-bold text-green-600">Free</p>
 
                     <vueIconButton outline variant="neutral" icon="ri-delete-bin-6-line" class=" absolute right-3 bottom-3" @clicked="$emit('deleteCard',card._id)"></vueIconButton>
                 </div>

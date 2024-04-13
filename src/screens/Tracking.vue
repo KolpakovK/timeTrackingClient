@@ -43,6 +43,11 @@
                 <VueField labelText="Note" name="note" type="textarea"></VueField>
                 <VueField labelText="Date" name="date" type="date"></VueField>
                 <VueField labelText="Estimation" name="timeEstimate" type="number" required></VueField>
+
+                <vueSelect name="billable" defaultValue="true" :options="[
+                    { value: true, label: 'Billable'},
+                    { value: false, label: 'Non billable'}
+                ]"></vueSelect>
                 
                 <vueButton type="submit"><template #button-content>Save</template></vueButton>
             </form>
@@ -157,6 +162,7 @@ export default{
                     date:e.target.date.value,
                     task:this.selectedTask._id,
                     timeEstimate:e.target.timeEstimate.value,
+                    billable:e.target.billable.value,
                 };
             }
             else{

@@ -43,7 +43,7 @@
                                 <span class="w-1/6 px-3 py-4  text-gray-900">{{ task.timeEstimate }}</span>
                                 <span class="w-1/6 px-3 py-4  text-gray-900" :class="{'text-primary-500 font-bold': (task.timeSpent>task.timeEstimate)}">{{ task.timeSpent }}</span>
                                 <span class="w-1/6 px-3 py-4  text-gray-900">{{ project.price + " €" }}</span>
-                                <span class="w-1/6 px-3 py-4  font-bold text-green-600">{{ task.timeSpent*project.price + " €" }}</span>
+                                <span class="w-1/6 px-3 py-4  font-bold text-green-600">{{  task.timeSpent*project.price + " €" }}</span>
                             </div>
                             <div class=" w-full rounded-md bg-green-100 bg-opacity-30 p-3">
                                 <div class="flex flex-col w-full">
@@ -58,8 +58,8 @@
                                         <span class="w-1/6"></span>
                                         <span class="w-1/6 px-3 py-4 text-gray-900">{{ formatDate(time.date,"DD MMMM YY") }}</span>
                                         <span class="w-2/6 px-3 py-4 text-gray-900">{{ time.note }}</span>
-                                        <span class="w-1/6 px-3 py-4 text-gray-900">{{ time.timeEstimate }}</span>
-                                        <span class="w-1/6 px-3 py-4 font-bold text-gray-900">{{ time.timeEstimate * project.price + " €" }}</span>
+                                        <span class="w-1/6 px-3 py-4 text-gray-900">{{ !time.billable ? time.timeEstimate + '/Free' : time.timeEstimate }}</span>
+                                        <span class="w-1/6 px-3 py-4 font-bold text-gray-900">{{ time.billable ? time.timeEstimate * project.price + " €" : 0  }}</span>
                                     </div>
                                 </div>
                             </div>
