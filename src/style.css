@@ -1,4 +1,84 @@
-/* ./src/style.css */
+@import"https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+@import "https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+
+    html{
+        margin: 0;
+    }
+
+    body{
+        margin: 0;
+        @apply bg-gray-100 min-h-screen;
+    }
+}
+
+@layer components{
+    .btn{
+        @apply px-3.5 h-8 flex justify-center items-center text-base font-bold rounded focus-visible:ring focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2;
+    }
+
+    .btn-primary-fill{
+        @apply bg-primary-500 text-white hover:bg-primary-700 focus:bg-primary-600 focus:ring-primary-500/50;
+    }
+
+    .btn-primary-outline{
+        @apply border border-primary-500 text-primary-500 border-solid hover:border-primary-700 hover:bg-primary-700 hover:text-white focus:ring-primary-500/50;
+    }
+
+    .btn-neutral-fill{
+        @apply bg-gray-200 text-gray-700 hover:bg-gray-300 focus:bg-gray-400;
+    }
+
+    .btn-neutral-outline{
+        @apply border bg-white border-gray-200 text-gray-700 border-solid hover:border-gray-400 hover:bg-gray-200;
+    }
+
+    .btn-link{
+        @apply bg-transparent text-gray-700 rounded-none border-transparent p-0 h-auto w-auto inline-block;
+    }
+
+    .btn-disabled{
+        @apply opacity-50 cursor-not-allowed;
+    }
+
+    .field{
+        @apply px-3.5 h-8 flex gap-1 items-center text-base border bg-white border-gray-200 rounded focus-within:border-blue-500 focus-visible:ring focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500/50 focus-within:ring-offset-2;
+    }
+
+    .text-area{
+        @apply px-3.5 min-h-8 py-1 h-fit flex gap-1 items-start text-base border bg-white border-gray-200 rounded focus-within:border-blue-500 focus-visible:ring focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500/50 focus-within:ring-offset-2;
+    }
+
+    .text-area > textarea{
+        @apply bg-transparent resize-none;
+    }
+
+    .field-content-span{
+        @apply text-base font-bold text-gray-400;
+    }
+
+    .field-error{
+        @apply border-red-500 focus-within:border-red-500 focus-within:ring-red-500/50;
+    }
+
+    .label{
+        @apply font-bold text-base text-gray-900 flex w-full gap-2 justify-start items-center h-fit;
+    }
+
+    .field-message{
+        @apply text-base font-medium text-gray-900 flex w-full gap-1 justify-start items-center h-fit pt-1;
+    }
+
+    .panel{
+        @apply p-12 bg-white rounded-lg border-gray-200 border-solid border shadow-lg;
+    }
+
+    .toast{
+        @apply px-3.5 h-fit py-2 rounded-md bg-white border border-solid border-gray-200 fixed right-8 bottom-8 z-50 text-xl overflow-hidden flex align-middle gap-2 w-80;
+    }
+}
